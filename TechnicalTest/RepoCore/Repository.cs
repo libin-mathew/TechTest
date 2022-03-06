@@ -32,8 +32,16 @@ namespace Interview.RepoCore
         /// <param name="id"></param>
         public void Delete(IComparable id)
         {
-            T item = _dataRepo.FirstOrDefault(e => e.Id == id);
-            _dataRepo.Remove(item);
+            try
+            {
+                T item = _dataRepo.FirstOrDefault(e => e.Id == id);
+                _dataRepo.Remove(item);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         /// <summary>
         /// Get an item from Repository by Id
@@ -42,8 +50,17 @@ namespace Interview.RepoCore
         /// <returns></returns>
         public T FindById(IComparable id)
         {
-            T entity = _dataRepo.FirstOrDefault(e => e.Id == id);
-            return entity;
+            try
+            {
+                T entity = _dataRepo.FirstOrDefault(e => e.Id == id);
+                return entity;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         /// <summary>
         /// Save new item to the Repository
@@ -51,7 +68,15 @@ namespace Interview.RepoCore
         /// <param name="entity"></param>
         public void Save(T entity)
         {
-            _dataRepo.Add(entity);
+            try
+            {
+                _dataRepo.Add(entity);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

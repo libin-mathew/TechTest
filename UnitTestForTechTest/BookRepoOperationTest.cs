@@ -48,7 +48,7 @@ namespace UnitTestForTechTest
         }
 
         [Test]
-        public void TryDeletingBookFromRepo()
+        public void TryDeletingBookFromRepo_01()
         {
             // To Test delete operation
             Book bookInSearchofLostTime = new Book { Id = 1, BookTittle = "In Search of Lost Time", Author = "Marcel Proust", Price = 2.5m, OriginallyPublished = 1913 };
@@ -68,7 +68,7 @@ namespace UnitTestForTechTest
         }
 
         [Test]
-        public void TryDeletingBookFromRepo_NegativeTest()
+        public void TryDeletingBookFromRepo_NegativeTest_01()
         {
             // To Test delete operation for an non exiting item in repo
             Book bookInSearchofLostTime = new Book { Id = 1, BookTittle = "In Search of Lost Time", Author = "Marcel Proust", Price = 2.5m, OriginallyPublished = 1913 };
@@ -90,7 +90,7 @@ namespace UnitTestForTechTest
         }
 
         [Test]
-        public void TryFindingBookFromRepo()
+        public void TryFindingBookFromRepo_01()
         {
             Book bookInSearchofLostTime = new Book { Id = 1, BookTittle = "In Search of Lost Time", Author = "Marcel Proust", Price = 2.5m, OriginallyPublished = 1913 };
             Book bookUlysses = new Book { Id = 2, BookTittle = "Ulysses", Author = "James Joycet", Price = 2.9m, OriginallyPublished = 1920 };
@@ -108,7 +108,7 @@ namespace UnitTestForTechTest
             Assert.IsNotNull(findBook);
         }
         [Test]
-        public void TryFindingBookFromRepo_NegativeTest()
+        public void TryFindingBookFromRepo_NegativeTest_01()
         {
             Book bookInSearchofLostTime = new Book { Id = 1, BookTittle = "In Search of Lost Time", Author = "Marcel Proust", Price = 2.5m, OriginallyPublished = 1913 };
             Book bookUlysses = new Book { Id = 2, BookTittle = "Ulysses", Author = "James Joycet", Price = 2.9m, OriginallyPublished = 1920 };
@@ -128,10 +128,18 @@ namespace UnitTestForTechTest
             Assert.IsNull(findBook);
         }
         [Test]
-        public void ErrorTest()
+        public void TryFetchingAllBooks()
         {
+            Book bookInSearchofLostTime = new Book { Id = 1, BookTittle = "In Search of Lost Time", Author = "Marcel Proust", Price = 2.5m, OriginallyPublished = 1913 };
+            Book bookUlysses = new Book { Id = 2, BookTittle = "Ulysses", Author = "James Joycet", Price = 2.9m, OriginallyPublished = 1920 };
+            Book bookWarAndPeace = new Book { Id = 3, BookTittle = "War and Peace", Author = "Leo Tolstoy", Price = 3.7m, OriginallyPublished = 1867 };
+
             Repository<Book> bookRepository = new Repository<Book>();
-            bookRepository.Delete(1);
+            bookRepository.Save(bookInSearchofLostTime);
+            bookRepository.Save(bookUlysses);
+            bookRepository.Save(bookWarAndPeace);
+
+            Assert.IsTrue(bookRepository.All().Count() == 3);
         }
     }
 }
